@@ -289,7 +289,7 @@ impl<
         let inode = Inode::new(first_block);
         self.save_inode(inode_num, &inode);
         self.activate_bit(inode_num, INODE_FULL_BLOCK);
-        self.activate_bit(self.first_data_block(), DATA_FULL_BLOCK);
+        self.activate_bit(first_block as usize, DATA_FULL_BLOCK);
         self.clear_block_buffer();
         self.disk.write(first_block as usize, &self.block_buffer).unwrap();
         return inode;
